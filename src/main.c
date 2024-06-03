@@ -8,6 +8,7 @@
 #include <sys/time.h>
 #include <asm-generic/ioctls.h>
 #include <time.h>
+#include <math.h>
 
 #define NUM_CHILDREN 5
 #define BUFFER_SIZE 128
@@ -121,7 +122,7 @@ int main() {
                         // Get timestamp
                         gettimeofday(&tv, NULL);
                         int sec = ((int) tv.tv_sec) - ((int) begin.tv_sec);
-                        double msec = abs(((double) tv.tv_usec) - ((double) begin.tv_usec)) / 1000;
+                        double msec = fabs(((double) tv.tv_usec) - ((double) begin.tv_usec)) / 1000;
 
                         char sec_str[5];
                         sprintf(sec_str, "%d", sec);
@@ -234,7 +235,7 @@ void normal_child(int child_idx) {
         // Get timestamp
         gettimeofday(&tv, NULL);
         int sec = ((int) tv.tv_sec) - ((int) begin.tv_sec);
-        double msec = abs(((double) tv.tv_usec) - ((double) begin.tv_usec)) / 1000;
+        double msec = fabs(((double) tv.tv_usec) - ((double) begin.tv_usec)) / 1000;
 
         char sec_str[5];
         sprintf(sec_str, "%d", sec);
@@ -299,7 +300,7 @@ void weird_child(int child_idx) {
         // Get timestamp
         gettimeofday(&tv, NULL);
         int sec = ((int) tv.tv_sec) - ((int) begin.tv_sec);
-        double msec = abs(((double) tv.tv_usec) - ((double) begin.tv_usec)) / 1000;
+        double msec = fabs(((double) tv.tv_usec) - ((double) begin.tv_usec)) / 1000;
 
         // Prompt user for message
         char user_input[MAX_INPUT];
